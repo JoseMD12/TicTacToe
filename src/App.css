@@ -13,6 +13,10 @@
   }
 }
 
+.App{
+  cursor: url('./Components/Assets/cross.png'), auto;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

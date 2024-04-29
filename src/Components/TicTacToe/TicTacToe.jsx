@@ -6,19 +6,26 @@ import cross_icon from "../Assets/cross.png";
 let data = Array(9).fill(null);
 
 const TicTacToe = () => {
-    let [count, setCount] = useState(0);
-    let [lock, setLock] = useState(false);
-    let titleRef = useRef("");
+    const [count, setCount] = useState(0);
+    const [lock, setLock] = useState(false);
+    const containerRef = useRef(null);
+    const titleRef = useRef("");
+
     const toggle = (e, index) => {
         if (lock) return 0;
 
         if (count % 2 === 0) {
             e.target.innerHTML = `<img src=${cross_icon} alt='cross' />`;
+            containerRef.current.style.cursor = `url(${circle_icon}), auto`;
+
             data[index] = "X";
         } else {
             e.target.innerHTML = `<img src=${circle_icon} alt='circle' />`;
+            containerRef.current.style.cursor = `url(${cross_icon}), auto`;
+
             data[index] = "O";
         }
+
         setCount(++count);
         checkWinner();
     };
@@ -53,7 +60,7 @@ const TicTacToe = () => {
     };
 
     return (
-        <div className='container'>
+        <div className='container' ref={containerRef}>
             <h1 className='title' ref={titleRef}>
                 Jogo da Velha
             </h1>
